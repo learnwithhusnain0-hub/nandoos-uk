@@ -85,6 +85,7 @@
             font-size: 2.5rem;
             color: var(--primary-blue);
             display: inline-block;
+            position: relative;
         }
 
         .section-title h2::after {
@@ -151,13 +152,14 @@
         header.scrolled {
             padding: 10px 0;
             background-color: rgba(26, 35, 126, 0.95);
+            backdrop-filter: blur(10px);
         }
 
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 15px 20px;
         }
 
         .logo {
@@ -176,12 +178,25 @@
             justify-content: center;
             color: white;
             font-size: 1.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-img::before {
+            content: 'A';
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
         }
 
         .logo-text h1 {
             font-size: 1.5rem;
             color: var(--white);
             margin-bottom: 0;
+            background: linear-gradient(to right, var(--white), #ffcc80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .logo-text p {
@@ -247,10 +262,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(26, 35, 126, 0.7), rgba(255, 109, 0, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background: linear-gradient(rgba(26, 35, 126, 0.8), rgba(255, 109, 0, 0.7)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             z-index: -1;
+            animation: zoomEffect 20s ease-in-out infinite alternate;
         }
 
         .hero-content {
@@ -266,6 +282,11 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards 0.5s;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, var(--white), #ffcc80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero p {
@@ -296,9 +317,41 @@
             animation-delay: 2.3s;
         }
 
+        /* Text Animation Effects */
+        .animated-text {
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-text::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
         /* About Section */
         .about {
             background-color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, transparent 70%);
+            top: -150px;
+            left: -150px;
+            border-radius: 50%;
+            opacity: 0.1;
         }
 
         .about-container {
@@ -306,6 +359,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
+            position: relative;
         }
 
         .about-img {
@@ -315,6 +369,18 @@
             transform: translateX(-50px);
             opacity: 0;
             transition: transform 1s ease, opacity 1s ease;
+            position: relative;
+        }
+
+        .about-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(26, 35, 126, 0.1));
+            z-index: 1;
         }
 
         .about-img.visible {
@@ -337,6 +403,19 @@
             color: var(--primary-blue);
             font-size: 2.2rem;
             margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-content h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-orange);
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
         }
 
         .about-content p {
@@ -356,17 +435,27 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            background-color: rgba(26, 35, 126, 0.03);
+            transition: var(--transition);
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            background-color: rgba(26, 35, 126, 0.08);
         }
 
         .value-icon {
             width: 50px;
             height: 50px;
-            background-color: rgba(26, 35, 126, 0.1);
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-orange));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-blue);
+            color: var(--white);
             font-size: 1.3rem;
             flex-shrink: 0;
         }
@@ -375,6 +464,19 @@
         .facilities {
             background-color: var(--primary-blue);
             color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .facilities::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 109, 0, 0.1) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
         }
 
         .facilities .section-title h2 {
@@ -385,6 +487,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
+            position: relative;
+            z-index: 1;
         }
 
         .facility-card {
@@ -396,6 +500,18 @@
             transition: var(--transition);
             transform: translateY(50px);
             opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .facility-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
         }
 
         .facility-card.visible {
@@ -419,6 +535,12 @@
             margin-bottom: 20px;
             color: var(--primary-orange);
             font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .facility-card:hover .facility-icon {
+            transform: scale(1.1) rotate(5deg);
+            background-color: rgba(255, 109, 0, 0.2);
         }
 
         .facility-card h3 {
@@ -430,6 +552,19 @@
         /* Gallery Section */
         .gallery {
             background-color: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(26, 35, 126, 0.05) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            border-radius: 50%;
         }
 
         .gallery-grid {
@@ -471,7 +606,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(26, 35, 126, 0.8), transparent);
+            background: linear-gradient(to top, rgba(26, 35, 126, 0.9), transparent);
             display: flex;
             align-items: flex-end;
             padding: 20px;
@@ -484,15 +619,15 @@
             opacity: 1;
         }
 
-        /* Directors Section - Updated with Gradient */
-        .directors {
+        /* Leadership Section */
+        .leadership {
             background: linear-gradient(135deg, #1a237e 0%, #283593 25%, #3949ab 50%, #5c6bc0 75%, #7986cb 100%);
             color: var(--white);
             position: relative;
             overflow: hidden;
         }
 
-        .directors::before {
+        .leadership::before {
             content: '';
             position: absolute;
             top: 0;
@@ -503,17 +638,17 @@
             z-index: 0;
         }
 
-        .directors .section-title h2 {
+        .leadership .section-title h2 {
             color: var(--white);
             position: relative;
             z-index: 1;
         }
 
-        .directors .section-title h2::after {
+        .leadership .section-title h2::after {
             background-color: var(--primary-orange);
         }
 
-        .directors-container {
+        .leadership-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
@@ -521,7 +656,7 @@
             z-index: 1;
         }
 
-        .director-card {
+        .leader-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: var(--border-radius);
@@ -532,20 +667,32 @@
             transition: var(--transition);
             transform: translateY(30px);
             opacity: 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .director-card.visible {
+        .leader-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
+        }
+
+        .leader-card.visible {
             transform: translateY(0);
             opacity: 1;
         }
 
-        .director-card:hover {
+        .leader-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             background: rgba(255, 255, 255, 0.15);
         }
 
-        .director-img {
+        .leader-img {
             width: 180px;
             height: 180px;
             border-radius: 50%;
@@ -553,21 +700,27 @@
             margin: 0 auto 20px;
             border: 5px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
         }
 
-        .director-img img {
+        .leader-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: var(--transition);
         }
 
-        .director-name {
+        .leader-card:hover .leader-img img {
+            transform: scale(1.1);
+        }
+
+        .leader-name {
             font-size: 1.5rem;
             margin-bottom: 10px;
             color: var(--white);
         }
 
-        .director-title {
+        .leader-title {
             color: var(--primary-orange);
             font-weight: 600;
             margin-bottom: 15px;
@@ -575,12 +728,24 @@
             font-size: 1.1rem;
         }
 
-        .director-quote {
+        .leader-quote {
             font-style: italic;
             color: rgba(255, 255, 255, 0.9);
             margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .leader-quote::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary-orange);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.3;
         }
 
         /* Admissions Section */
@@ -588,10 +753,25 @@
             background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
             color: var(--white);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admissions::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            border-radius: 50%;
         }
 
         .admissions .section-title h2 {
             color: var(--white);
+            position: relative;
+            z-index: 1;
         }
 
         .admissions .section-title h2::after {
@@ -603,10 +783,14 @@
             justify-content: space-around;
             flex-wrap: wrap;
             margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
         }
 
         .stat-item {
             margin: 20px;
+            position: relative;
+            padding: 20px;
         }
 
         .stat-number {
@@ -614,6 +798,18 @@
             font-weight: 700;
             margin-bottom: 10px;
             font-family: 'Montserrat', sans-serif;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: inline-block;
+        }
+
+        .stat-number::after {
+            content: '+';
+            position: absolute;
+            right: -20px;
+            top: 0;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .stat-label {
@@ -626,6 +822,19 @@
             background-color: var(--primary-blue);
             color: var(--white);
             padding: 70px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 109, 0, 0.1) 0%, transparent 70%);
+            bottom: -150px;
+            right: -150px;
+            border-radius: 50%;
         }
 
         .footer-container {
@@ -633,6 +842,8 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
         }
 
         .footer-logo .logo-img {
@@ -644,6 +855,10 @@
         .footer-logo h3 {
             font-size: 1.8rem;
             margin-bottom: 5px;
+            background: linear-gradient(to right, var(--white), #ffcc80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .footer-logo p {
@@ -654,6 +869,19 @@
             font-size: 1.3rem;
             margin-bottom: 20px;
             color: var(--white);
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-contact h4::after, .footer-social h4::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-orange);
+            bottom: -8px;
+            left: 0;
+            border-radius: 2px;
         }
 
         .contact-item {
@@ -672,6 +900,13 @@
             align-items: center;
             justify-content: center;
             color: var(--primary-orange);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover .contact-icon {
+            background-color: var(--primary-orange);
+            color: white;
+            transform: rotate(10deg);
         }
 
         .contact-phone {
@@ -688,6 +923,7 @@
         .contact-phone:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .social-icons {
@@ -709,7 +945,8 @@
 
         .social-icon:hover {
             background-color: var(--primary-orange);
-            transform: translateY(-5px);
+            transform: translateY(-5px) rotate(10deg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .copyright {
@@ -718,6 +955,39 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float i {
+            margin-top: 2px;
         }
 
         /* Animations */
@@ -734,6 +1004,45 @@
             }
         }
 
+        @keyframes zoomEffect {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(37, 211, 102, 0.7);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .hero h1 {
@@ -745,7 +1054,7 @@
                 gap: 40px;
             }
             
-            .directors-container {
+            .leadership-container {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -766,6 +1075,8 @@
                 padding: 30px 0;
                 transition: var(--transition);
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                z-index: 999;
             }
             
             .nav-menu.active {
@@ -774,6 +1085,7 @@
             
             .mobile-menu-btn {
                 display: block;
+                z-index: 1000;
             }
             
             .hero h1 {
@@ -797,8 +1109,16 @@
                 font-size: 2rem;
             }
             
-            .directors-container {
+            .leadership-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+                bottom: 20px;
+                right: 20px;
             }
         }
 
@@ -819,7 +1139,7 @@
                 font-size: 2.5rem;
             }
             
-            .director-img {
+            .leader-img {
                 width: 150px;
                 height: 150px;
             }
@@ -831,11 +1151,9 @@
     <header id="header">
         <div class="container header-container">
             <div class="logo">
-                <div class="logo-img">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
+                <div class="logo-img"></div>
                 <div class="logo-text">
-                    <h1>Allied School Haroonabad</h1>
+                    <h1 class="animated-text">Allied School Haroonabad</h1>
                     <p>Quality Education Since 1995</p>
                 </div>
             </div>
@@ -849,7 +1167,7 @@
                 <a href="#about">About</a>
                 <a href="#facilities">Facilities</a>
                 <a href="#gallery">Gallery</a>
-                <a href="#directors">Directors</a>
+                <a href="#leadership">Leadership</a>
                 <a href="#admissions">Admissions</a>
             </nav>
         </div>
@@ -859,8 +1177,8 @@
     <section class="hero" id="home">
         <div class="hero-bg"></div>
         <div class="container hero-content">
-            <h1>Shaping Bright Futures at Allied School Haroonabad</h1>
-            <p id="typed-text">Quality Education | Character Building | Academic Excellence</p>
+            <h1 class="animated-text">Shaping Bright Futures at Allied School Haroonabad</h1>
+            <p id="typed-text"></p>
             <div class="hero-buttons">
                 <a href="#admissions" class="btn btn-primary">Admissions Open</a>
                 <a href="#gallery" class="btn btn-secondary">Explore Our Campus</a>
@@ -872,7 +1190,7 @@
     <section class="about" id="about">
         <div class="container">
             <div class="section-title">
-                <h2>About Our School</h2>
+                <h2 class="animated-text">About Our School</h2>
             </div>
             
             <div class="about-container">
@@ -881,7 +1199,7 @@
                 </div>
                 
                 <div class="about-content" id="aboutContent">
-                    <h2>Welcome to Allied School Haroonabad</h2>
+                    <h2 class="animated-text">Welcome to Allied School Haroonabad</h2>
                     <p>Allied School Haroonabad has been providing quality education since 1995. We are committed to nurturing young minds with a perfect blend of academic excellence and character building.</p>
                     <p>Our holistic approach to education ensures that every student receives personalized attention to unlock their full potential in a safe, supportive, and stimulating environment.</p>
                     
@@ -935,7 +1253,7 @@
     <section class="facilities" id="facilities">
         <div class="container">
             <div class="section-title">
-                <h2>Our Facilities</h2>
+                <h2 class="animated-text">Our Facilities</h2>
             </div>
             
             <div class="facilities-grid" id="facilitiesGrid">
@@ -994,7 +1312,7 @@
     <section class="gallery" id="gallery">
         <div class="container">
             <div class="section-title">
-                <h2>Campus Gallery</h2>
+                <h2 class="animated-text">Campus Gallery</h2>
             </div>
             
             <div class="gallery-grid" id="galleryGrid">
@@ -1043,42 +1361,42 @@
         </div>
     </section>
 
-    <!-- Directors Section - Updated with 3 Partners -->
-    <section class="directors" id="directors">
+    <!-- Leadership Section -->
+    <section class="leadership" id="leadership">
         <div class="container">
             <div class="section-title">
-                <h2>Our Directors</h2>
+                <h2 class="animated-text">Our Leadership</h2>
             </div>
             
-            <div class="directors-container" id="directorsContainer">
-                <div class="director-card">
-                    <div class="director-img">
+            <div class="leadership-container" id="leadershipContainer">
+                <div class="leader-card">
+                    <div class="leader-img">
                         <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="Sir Asim Majeed">
                     </div>
-                    <h3 class="director-name">Sir Asim Majeed</h3>
-                    <span class="director-title">Founding Director</span>
+                    <h3 class="leader-name">Sir Asim Majeed</h3>
+                    <span class="leader-title">Director</span>
                     <p>With over 20 years of experience in educational leadership, Sir Asim Majeed has been instrumental in establishing Allied School Haroonabad as a center of academic excellence.</p>
-                    <div class="director-quote">"Education is the most powerful weapon which you can use to change the world."</div>
+                    <div class="leader-quote">"Education is the most powerful weapon which you can use to change the world."</div>
                 </div>
                 
-                <div class="director-card">
-                    <div class="director-img">
+                <div class="leader-card">
+                    <div class="leader-img">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="Sir Jamshaid Akbar">
                     </div>
-                    <h3 class="director-name">Sir Jamshaid Akbar</h3>
-                    <span class="director-title">Academic Director</span>
+                    <h3 class="leader-name">Sir Jamshaid Akbar</h3>
+                    <span class="leader-title">Partner</span>
                     <p>Specializing in curriculum development and modern teaching methodologies, Sir Jamshaid Akbar ensures that our students receive world-class education tailored to their needs.</p>
-                    <div class="director-quote">"The goal of education is not to increase the amount of knowledge but to create the possibilities for a child to invent and discover."</div>
+                    <div class="leader-quote">"The goal of education is not to increase the amount of knowledge but to create the possibilities for a child to invent and discover."</div>
                 </div>
                 
-                <div class="director-card">
-                    <div class="director-img">
+                <div class="leader-card">
+                    <div class="leader-img">
                         <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Sir Abid">
                     </div>
-                    <h3 class="director-name">Sir Abid</h3>
-                    <span class="director-title">Administrative Director</span>
+                    <h3 class="leader-name">Sir Abid</h3>
+                    <span class="leader-title">Partner</span>
                     <p>Overseeing campus operations and student affairs, Sir Abid ensures that Allied School Haroonabad provides a safe, disciplined, and conducive learning environment for all students.</p>
-                    <div class="director-quote">"The function of education is to teach one to think intensively and to think critically. Intelligence plus character - that is the goal of true education."</div>
+                    <div class="leader-quote">"The function of education is to teach one to think intensively and to think critically. Intelligence plus character - that is the goal of true education."</div>
                 </div>
             </div>
         </div>
@@ -1088,7 +1406,7 @@
     <section class="admissions" id="admissions">
         <div class="container">
             <div class="section-title">
-                <h2>Admissions Open</h2>
+                <h2 class="animated-text">Admissions Open</h2>
             </div>
             
             <div class="stats-container">
@@ -1117,10 +1435,8 @@
         <div class="container">
             <div class="footer-container">
                 <div class="footer-logo">
-                    <div class="logo-img">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Allied School Haroonabad</h3>
+                    <div class="logo-img"></div>
+                    <h3 class="animated-text">Allied School Haroonabad</h3>
                     <p>Shaping bright futures through quality education since 1995.</p>
                 </div>
                 
@@ -1165,10 +1481,15 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 Allied School Haroonabad. All rights reserved.</p>
+                <p>&copy; 2026 Allied School Haroonabad. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/923002562025?text=Hi%20Allied%20School%20Haroonabad,%20I%20would%20like%20to%20inquire%20about%20admissions" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
         // Mobile Menu Toggle
@@ -1201,21 +1522,62 @@
             }
         });
         
-        // Typing animation for hero subheading
+        // Enhanced Typing animation for hero subheading
         const typedText = document.getElementById('typed-text');
-        const text = "Quality Education | Character Building | Academic Excellence";
-        let index = 0;
+        const texts = [
+            "Quality Education | Character Building | Academic Excellence",
+            "Nurturing Young Minds Since 1995",
+            "Where Every Child's Potential is Unlocked"
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
         
         function typeWriter() {
-            if (index < text.length) {
-                typedText.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, 50);
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                // Deleting text
+                typedText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                // Typing text
+                typedText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
             }
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                // Pause at the end of typing
+                isDeleting = true;
+                typingSpeed = 1500;
+            } else if (isDeleting && charIndex === 0) {
+                // Move to next text after deleting
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typingSpeed = 500;
+            }
+            
+            setTimeout(typeWriter, typingSpeed);
         }
         
         // Start typing animation after hero title animation
         setTimeout(typeWriter, 1500);
+        
+        // Text animation for headings on scroll
+        function animateHeadings() {
+            const headings = document.querySelectorAll('.animated-text');
+            headings.forEach(heading => {
+                const headingPosition = heading.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (headingPosition < screenPosition) {
+                    heading.classList.add('animate');
+                }
+            });
+        }
         
         // Scroll animations
         function checkVisibility() {
@@ -1223,7 +1585,7 @@
             const aboutContent = document.getElementById('aboutContent');
             const facilityCards = document.querySelectorAll('.facility-card');
             const galleryItems = document.querySelectorAll('.gallery-item');
-            const directorCards = document.querySelectorAll('.director-card');
+            const leaderCards = document.querySelectorAll('.leader-card');
             
             // About section
             const aboutPosition = aboutImg.getBoundingClientRect().top;
@@ -1250,13 +1612,16 @@
                 }
             });
             
-            // Director cards
-            directorCards.forEach(card => {
+            // Leader cards
+            leaderCards.forEach(card => {
                 const cardPosition = card.getBoundingClientRect().top;
                 if (cardPosition < screenPosition) {
                     card.classList.add('visible');
                 }
             });
+            
+            // Animate headings
+            animateHeadings();
         }
         
         // Counter animation for admissions section
@@ -1310,12 +1675,7 @@
         
         // Make phone number clickable and redirect
         function setupPhoneRedirect() {
-            const contactBtn = document.querySelector('a[href="#admissions"]');
-            if (contactBtn && contactBtn.textContent.includes("Contact for Admission")) {
-                // Already updated in HTML
-            }
-            
-            // Also make any "Contact for Admission" buttons click to call
+            // Make any "Contact for Admission" buttons click to call
             const admissionButtons = document.querySelectorAll('.btn-primary');
             admissionButtons.forEach(btn => {
                 if (btn.textContent.includes("Contact for Admission")) {
@@ -1325,11 +1685,25 @@
             });
         }
         
+        // Initialize floating elements animation
+        function animateFloatingElements() {
+            const valueItems = document.querySelectorAll('.value-item');
+            valueItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.2}s`;
+            });
+            
+            const facilityCards = document.querySelectorAll('.facility-card');
+            facilityCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        }
+        
         // Add event listeners
         window.addEventListener('scroll', checkVisibility);
         window.addEventListener('scroll', checkAdmissionsVisibility);
         window.addEventListener('load', checkVisibility);
         window.addEventListener('load', setupPhoneRedirect);
+        window.addEventListener('load', animateFloatingElements);
         
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1363,12 +1737,14 @@
                 modal.style.left = '0';
                 modal.style.width = '100%';
                 modal.style.height = '100%';
-                modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+                modal.style.backgroundColor = 'rgba(0,0,0,0.95)';
                 modal.style.display = 'flex';
                 modal.style.justifyContent = 'center';
                 modal.style.alignItems = 'center';
                 modal.style.zIndex = '2000';
                 modal.style.cursor = 'pointer';
+                modal.style.opacity = '0';
+                modal.style.transition = 'opacity 0.3s ease';
                 
                 // Create image inside modal
                 const modalImg = document.createElement('img');
@@ -1378,16 +1754,40 @@
                 modalImg.style.maxHeight = '90%';
                 modalImg.style.borderRadius = '8px';
                 modalImg.style.boxShadow = '0 5px 30px rgba(0,0,0,0.5)';
+                modalImg.style.transform = 'scale(0.9)';
+                modalImg.style.transition = 'transform 0.3s ease';
                 
                 // Close modal on click
                 modal.addEventListener('click', () => {
-                    document.body.removeChild(modal);
+                    modal.style.opacity = '0';
+                    setTimeout(() => {
+                        if (document.body.contains(modal)) {
+                            document.body.removeChild(modal);
+                        }
+                    }, 300);
                 });
                 
                 modal.appendChild(modalImg);
                 document.body.appendChild(modal);
+                
+                // Trigger animation
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                    modalImg.style.transform = 'scale(1)';
+                }, 10);
             });
         });
+        
+        // Add floating animation to some elements
+        function addFloatingAnimation() {
+            const elements = document.querySelectorAll('.value-icon, .facility-icon, .leader-img');
+            elements.forEach((el, index) => {
+                el.style.animation = `float 3s ease-in-out ${index * 0.2}s infinite`;
+            });
+        }
+        
+        // Initialize floating animation
+        window.addEventListener('load', addFloatingAnimation);
     </script>
 </body>
 </html>
