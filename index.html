@@ -484,65 +484,103 @@
             opacity: 1;
         }
 
-        /* Principal Section */
-        .principal {
-            background-color: var(--white);
+        /* Directors Section - Updated with Gradient */
+        .directors {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 25%, #3949ab 50%, #5c6bc0 75%, #7986cb 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
         }
 
-        .principal-container {
+        .directors::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+
+        .directors .section-title h2 {
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .directors .section-title h2::after {
+            background-color: var(--primary-orange);
+        }
+
+        .directors-container {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 50px;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
         }
 
-        .principal-img {
-            width: 300px;
-            height: 300px;
+        .director-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            transform: translateY(30px);
+            opacity: 0;
+        }
+
+        .director-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .director-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .director-img {
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             overflow: hidden;
-            box-shadow: var(--card-shadow);
-            border: 8px solid var(--light-gray);
+            margin: 0 auto 20px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .principal-img img {
+        .director-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .principal-message {
-            padding-left: 20px;
-        }
-
-        .principal-message h2 {
-            color: var(--primary-blue);
-            font-size: 2.2rem;
+        .director-name {
+            font-size: 1.5rem;
             margin-bottom: 10px;
+            color: var(--white);
         }
 
-        .principal-title {
+        .director-title {
             color: var(--primary-orange);
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: block;
+            font-size: 1.1rem;
         }
 
-        .quote {
-            font-size: 1.2rem;
+        .director-quote {
             font-style: italic;
-            color: #555;
-            padding-left: 20px;
-            border-left: 4px solid var(--primary-orange);
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        .quote.visible {
-            opacity: 1;
-            transform: translateX(0);
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* Admissions Section */
@@ -636,6 +674,22 @@
             color: var(--primary-orange);
         }
 
+        .contact-phone {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-orange);
+            transition: var(--transition);
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-phone:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
         .social-icons {
             display: flex;
             gap: 15px;
@@ -686,18 +740,13 @@
                 font-size: 3rem;
             }
             
-            .about-container, .principal-container {
+            .about-container {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
             
-            .principal-img {
-                justify-self: center;
-            }
-            
-            .principal-message {
-                padding-left: 0;
-                text-align: center;
+            .directors-container {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -747,6 +796,10 @@
             .section-title h2 {
                 font-size: 2rem;
             }
+            
+            .directors-container {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 480px) {
@@ -764,6 +817,11 @@
             
             .stat-number {
                 font-size: 2.5rem;
+            }
+            
+            .director-img {
+                width: 150px;
+                height: 150px;
             }
         }
     </style>
@@ -791,7 +849,7 @@
                 <a href="#about">About</a>
                 <a href="#facilities">Facilities</a>
                 <a href="#gallery">Gallery</a>
-                <a href="#principal">Principal</a>
+                <a href="#directors">Directors</a>
                 <a href="#admissions">Admissions</a>
             </nav>
         </div>
@@ -985,27 +1043,42 @@
         </div>
     </section>
 
-    <!-- Principal Section -->
-    <section class="principal" id="principal">
+    <!-- Directors Section - Updated with 3 Partners -->
+    <section class="directors" id="directors">
         <div class="container">
             <div class="section-title">
-                <h2>Message from Principal</h2>
+                <h2>Our Directors</h2>
             </div>
             
-            <div class="principal-container">
-                <div class="principal-img">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="Principal">
+            <div class="directors-container" id="directorsContainer">
+                <div class="director-card">
+                    <div class="director-img">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="Sir Asim Majeed">
+                    </div>
+                    <h3 class="director-name">Sir Asim Majeed</h3>
+                    <span class="director-title">Founding Director</span>
+                    <p>With over 20 years of experience in educational leadership, Sir Asim Majeed has been instrumental in establishing Allied School Haroonabad as a center of academic excellence.</p>
+                    <div class="director-quote">"Education is the most powerful weapon which you can use to change the world."</div>
                 </div>
                 
-                <div class="principal-message">
-                    <h2>Mr. Ahmed Raza</h2>
-                    <span class="principal-title">Principal, Allied School Haroonabad</span>
-                    
-                    <div class="quote" id="principalQuote">
-                        "At Allied School Haroonabad, we believe that education is not just about academic excellence but also about character building. Our mission is to provide a nurturing environment where students can develop intellectually, emotionally, and morally to become responsible citizens and future leaders."
+                <div class="director-card">
+                    <div class="director-img">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="Sir Jamshaid Akbar">
                     </div>
-                    
-                    <p>With over 25 years of experience in education, Mr. Ahmed Raza has led Allied School Haroonabad to become one of the most respected educational institutions in the region, consistently achieving outstanding academic results while fostering a culture of respect, integrity, and lifelong learning.</p>
+                    <h3 class="director-name">Sir Jamshaid Akbar</h3>
+                    <span class="director-title">Academic Director</span>
+                    <p>Specializing in curriculum development and modern teaching methodologies, Sir Jamshaid Akbar ensures that our students receive world-class education tailored to their needs.</p>
+                    <div class="director-quote">"The goal of education is not to increase the amount of knowledge but to create the possibilities for a child to invent and discover."</div>
+                </div>
+                
+                <div class="director-card">
+                    <div class="director-img">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Sir Abid">
+                    </div>
+                    <h3 class="director-name">Sir Abid</h3>
+                    <span class="director-title">Administrative Director</span>
+                    <p>Overseeing campus operations and student affairs, Sir Abid ensures that Allied School Haroonabad provides a safe, disciplined, and conducive learning environment for all students.</p>
+                    <div class="director-quote">"The function of education is to teach one to think intensively and to think critically. Intelligence plus character - that is the goal of true education."</div>
                 </div>
             </div>
         </div>
@@ -1035,7 +1108,7 @@
                 </div>
             </div>
             
-            <a href="#contact" class="btn btn-primary">Contact for Admission</a>
+            <a href="tel:03002562025" class="btn btn-primary">Contact for Admission</a>
         </div>
     </section>
 
@@ -1058,7 +1131,7 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div>
-                            <p>72/4-r Road, Haroonabad, Pakistan</p>
+                            <p>Main Campus, College Road, Haroonabad, Pakistan</p>
                         </div>
                     </div>
                     
@@ -1067,16 +1140,7 @@
                             <i class="fas fa-phone"></i>
                         </div>
                         <div>
-                            <p>+92 300 256 2025</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <p>info@alliedharoonabad.edu.pk</p>
+                            <a href="tel:03002562025" class="contact-phone">0300 256 2025</a>
                         </div>
                     </div>
                 </div>
@@ -1101,7 +1165,7 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2026 Allied School Haroonabad. All rights reserved.</p>
+                <p>&copy; 2023 Allied School Haroonabad. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1159,7 +1223,7 @@
             const aboutContent = document.getElementById('aboutContent');
             const facilityCards = document.querySelectorAll('.facility-card');
             const galleryItems = document.querySelectorAll('.gallery-item');
-            const principalQuote = document.getElementById('principalQuote');
+            const directorCards = document.querySelectorAll('.director-card');
             
             // About section
             const aboutPosition = aboutImg.getBoundingClientRect().top;
@@ -1186,11 +1250,13 @@
                 }
             });
             
-            // Principal quote
-            const quotePosition = principalQuote.getBoundingClientRect().top;
-            if (quotePosition < screenPosition) {
-                principalQuote.classList.add('visible');
-            }
+            // Director cards
+            directorCards.forEach(card => {
+                const cardPosition = card.getBoundingClientRect().top;
+                if (cardPosition < screenPosition) {
+                    card.classList.add('visible');
+                }
+            });
         }
         
         // Counter animation for admissions section
@@ -1242,10 +1308,28 @@
             }
         }
         
+        // Make phone number clickable and redirect
+        function setupPhoneRedirect() {
+            const contactBtn = document.querySelector('a[href="#admissions"]');
+            if (contactBtn && contactBtn.textContent.includes("Contact for Admission")) {
+                // Already updated in HTML
+            }
+            
+            // Also make any "Contact for Admission" buttons click to call
+            const admissionButtons = document.querySelectorAll('.btn-primary');
+            admissionButtons.forEach(btn => {
+                if (btn.textContent.includes("Contact for Admission")) {
+                    btn.href = "tel:03002562025";
+                    btn.setAttribute("onclick", "window.location.href='tel:03002562025'");
+                }
+            });
+        }
+        
         // Add event listeners
         window.addEventListener('scroll', checkVisibility);
         window.addEventListener('scroll', checkAdmissionsVisibility);
         window.addEventListener('load', checkVisibility);
+        window.addEventListener('load', setupPhoneRedirect);
         
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
